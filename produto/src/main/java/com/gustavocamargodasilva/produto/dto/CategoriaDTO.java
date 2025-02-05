@@ -1,10 +1,16 @@
 package com.gustavocamargodasilva.produto.dto;
 
 import com.gustavocamargodasilva.produto.entities.Categoria;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 
 public class CategoriaDTO {
 
     private Long id;
+
+    @NotNull(message = "Campo obrigatório")
+    @Size(min = 1, max = 20, message = "O campo deve ter entre 1 e 80 caracteres")
     private String nome;
 
     public CategoriaDTO() { }

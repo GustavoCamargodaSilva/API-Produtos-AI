@@ -2,6 +2,7 @@ package com.gustavocamargodasilva.produto.controllers;
 
 import com.gustavocamargodasilva.produto.dto.CategoriaDTO;
 import com.gustavocamargodasilva.produto.service.CategoriaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class CategoriaController {
     private CategoriaService categoriaService;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<CategoriaDTO> createCategoria(@RequestBody CategoriaDTO categoriaDTO) {
+    public ResponseEntity<CategoriaDTO> createCategoria(@Valid @RequestBody CategoriaDTO categoriaDTO) {
         categoriaDTO = categoriaService.createCategoria(categoriaDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
