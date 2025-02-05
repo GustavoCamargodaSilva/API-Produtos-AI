@@ -7,15 +7,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
+import java.util.List;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/categoria")
 public class CategoriaController {
 
     @Autowired
     private CategoriaService categoriaService;
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity<CategoriaDTO> createCategoria(@RequestBody CategoriaDTO categoriaDTO) {
         categoriaDTO = categoriaService.createCategoria(categoriaDTO);
 
@@ -24,4 +25,18 @@ public class CategoriaController {
 
         return ResponseEntity.created(uri).body(categoriaDTO);
     }
+
+    @GetMapping("/listar")
+    public ResponseEntity<List<CategoriaDTO>> listarTodasCategorias(){
+        List<CategoriaDTO> categorias = categoriaService.listarTodasCategorias();
+        return ResponseEntity.ok().body(categorias);
+    }
+
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<CategoriaDTO> buscarCategoriaPorId(@PathVariable Long id){
+        CategoriaDTO categoriaDTO = categoriaService.buscarCategoriaPorId(id);
+        return ResponseEntity.ok().body(categoriaDTO);
+    }
+
+
 }
